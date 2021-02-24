@@ -26,6 +26,29 @@ resource "google_compute_instance" "puppet-master" {
 
   metadata = {
     startup-script        = "${module.startup-script-lib.content}"
-    startup-script-custom = file("${path.module}/startup.sh")
+    startup-script-custom = file("${path.module}/masterstartup.sh")
+  }
+}
+
+resource "google_compute_instance" "puppet-slave" {
+
+  name = "puppet-slave"
+
+  machine_type = "e2-medium"
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-os-cloud/ubuntu-1804-bionic-v20210211"
+    }
+  }
+
+  network_interface {
+    network = "default"
+    access_config {} 
+  }
+  
+  metadata = {
+    startup-script        = "${module.startup-script-lib.content}"
+    startup-script-custom = file("${path.module}/slavestartup.sh")
   }
 }

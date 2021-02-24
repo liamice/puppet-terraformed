@@ -1,9 +1,9 @@
 variable "project" {
     type = string
-    default = "<project ID>"
+    default = "winternetuk"
 }
 
 variable "zone" {
     type = string
-    default = "<zone>"
+    default = "europe-west3-a"
 }
