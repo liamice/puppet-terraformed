@@ -9,7 +9,7 @@ provider "google" {
 
 resource "google_compute_instance" "puppet-master" {
 
-  name = "puppet-master"
+  name = "puppet"
 
   machine_type = "e2-medium"
 

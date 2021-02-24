@@ -13,20 +13,36 @@ Usage:
 3) Run "Terraform apply" to deploy
 
 
-This will deploy a puppet-master as well as a puppet-slave. However it does not configre them, configuration must be completed manually:
+This will deploy a puppet master and slave server, however it does not configure them
 
-set the server setting to your Puppet master’s hostname with the following command: puppet config set server <MASTER FDQN> --section main.
+Configuration: 
 
-For other settings you might want to change, see a list of agent-related settings.
+Master:
 
-Start the puppet service: sudo /opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true.
+```bash
+puppetserver ca setup   #setup certs
 
-(Optional) To see a sample of Puppet agent’s output and verify any changes you may have made to your configuration settings in step 5, manually launch and watch a Puppet run: sudo /opt/puppetlabs/bin/puppet agent --test
+sudo /opt/puppetlabs/bin/puppet resource service puppetserver ensure=running    #start puppetserver
+```
 
-Sign certificates on the certificate authority (CA) master.
 
-On the Puppet master:
+Slave:
 
-Run sudo /opt/puppetlabs/bin/puppet cert list to see any outstanding requests.
-Run sudo /opt/puppetlabs/bin/puppet cert sign <NAME> to sign a request.
-As each Puppet agent runs for the first time, it submits a certificate signing request (CSR) to the CA Puppet master. You must log into that server to check for and sign certificates. After an agent’s certificate is signed, it regularly fetches and applies configuration catalogs from the Puppet master.
+```bash
+sudo nano /etc/hosts    #open hosts file in nano
+```
+edit the hosts file:
+<puppet_master_internal_ip> puppet 
+```bash
+sudo puppet resource service puppet ensure=running  #start agent service
+
+sudo /opt/puppetlabs/bin/puppet agent -t    #run agent
+```
+
+Back to the master:
+
+```bash
+sudo /opt/puppetlabs/bin/puppetserver ca list   #list requested certs
+
+sudo /opt/puppetlabs/bin/puppetserver ca sign --al  #sign all requested certs
+```
