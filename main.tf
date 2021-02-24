@@ -3,8 +3,8 @@ module "startup-script-lib" {
 }
 
 provider "google" {
-    project = "winternetuk"
-    zone = "europe-west3-a"
+    project = var.project
+    zone = var.zone
 }
 
 resource "google_compute_instance" "puppet-master" {
