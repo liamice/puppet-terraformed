@@ -20,6 +20,9 @@ sudo apt-get install -y puppetserver
 #install ruby
 sudo apt-get install ruby
 
+#install git
+sudo apt-get install git
+
 #start puppetserver
 sudo systemctl start puppetserver
 
