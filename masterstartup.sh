@@ -17,6 +17,12 @@ sudo dpkg -i /etc/puppet-release-bionic.deb
 #install puppet master
 sudo apt-get install -y puppetserver
 
+#install ruby
+sudo apt-get install ruby
+
+#start puppetserver
+sudo systemctl start puppetserver
+
 echo "*****   Installation Complteted!!   *****"
 
 echo "Welcome to Google Compute VM Instance deployed using Terraform!!!"
