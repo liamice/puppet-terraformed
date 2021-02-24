@@ -1,1 +1,0 @@
-{"Modules":[{"Key":"startup-script-lib","Source":"git::https://github.com/terraform-google-modules/terraform-google-startup-scripts.git?ref=v0.1.0","Dir":".terraform/modules/startup-script-lib"},{"Key":"","Source":"","Dir":"."}]}
